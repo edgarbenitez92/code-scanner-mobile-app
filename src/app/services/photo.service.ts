@@ -2,24 +2,23 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PhotoService {
+  photo: string[] = [];
 
-  photo: string = '';
+  constructor() {}
 
-  constructor() { }
-
-  async getNewPhoto() {
+  async addNewPhoto() {
     const photo = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 100
+      quality: 100,
     });
 
-    if(photo.webPath) {
+    if (photo.webPath) {
       console.log('photo promise: ', photo);
-      this.photo = photo.webPath;
+      this.photo.unshift(photo.webPath);
     }
   }
 }

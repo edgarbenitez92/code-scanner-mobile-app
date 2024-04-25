@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-img [src]="currentPhoto"></ion-img>
+  <ion-img [src]="photo" *ngFor="let photo of photos"></ion-img>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="takePhoto()">
