@@ -6,15 +6,21 @@ import { PhotoService } from 'src/app/services/photo.service';
   templateUrl: './gallery.component.html',
 })
 export class GalleryComponent implements OnInit {
-  photos: string[] = [];
+  photo: string = '';
 
-  constructor(private photoService: PhotoService) {
-    this.photos = this.photoService.photo;
-  }
+  constructor(private photoService: PhotoService) {}
 
   ngOnInit(): void {}
 
   async takePhoto() {
-    await this.photoService.addNewPhoto();
+    console.log('0: ', this.photo);
+    const newPhoto = (await this.photoService
+      .addNewPhoto()
+      .catch(() => console.log('error'))) as string;
+
+    if (newPhoto) {
+      console.log('newPhoto: ', newPhoto);
+      this.photo = newPhoto;
+    }
   }
 }

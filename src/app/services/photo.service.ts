@@ -9,7 +9,7 @@ export class PhotoService {
 
   constructor() {}
 
-  async addNewPhoto() {
+  async addNewPhoto(): Promise<string | null> {
     const photo = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
@@ -18,7 +18,9 @@ export class PhotoService {
 
     if (photo.webPath) {
       console.log('photo promise: ', photo);
-      this.photo.unshift(photo.webPath);
+      return photo.webPath;
     }
+
+    return null;
   }
 }
